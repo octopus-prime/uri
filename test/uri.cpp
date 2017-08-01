@@ -55,7 +55,16 @@ std::initializer_list<std::uint16_t> const ports
 	0,
 };
 
-BOOST_DATA_TEST_CASE(test_success, strings ^ schemes ^ userinfos ^ hosts ^ ports, string, scheme, userinfo, host, port)
+
+std::initializer_list<std::string> const paths
+{
+	"/pub/ietf/uri/",
+	"",
+};
+
+BOOST_DATA_TEST_CASE(test_success,
+		strings ^ schemes ^ userinfos ^ hosts ^ ports ^ paths,
+		string,   scheme,   userinfo,   host,   port,   path)
 {
 	uri temp;
 	BOOST_REQUIRE_NO_THROW(temp = uri(string));
@@ -63,6 +72,7 @@ BOOST_DATA_TEST_CASE(test_success, strings ^ schemes ^ userinfos ^ hosts ^ ports
 	BOOST_CHECK_EQUAL(temp.userinfo(), userinfo);
 	BOOST_CHECK_EQUAL(temp.host(), host);
 	BOOST_CHECK_EQUAL(temp.port(), port);
+	BOOST_CHECK_EQUAL(temp.path(), path);
 }
 
 //std::initializer_list<string_t> const invalids
