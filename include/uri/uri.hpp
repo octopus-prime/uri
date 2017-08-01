@@ -17,7 +17,7 @@ public:
 	struct impl;
 
 	uri();
-	uri(std::string const& str);
+	uri(std::string const& string);
 	uri(std::string const& scheme, std::string const& userinfo,
 		std::string const& host, std::uint16_t port,
 		std::string const& path, std::string const& query,
@@ -30,7 +30,7 @@ public:
 	std::string path() const;
 	std::string query() const;
 	std::string fragment() const;
-	std::string str() const;
+	std::string string() const;
 
 private:
 	std::shared_ptr<impl> pimpl;

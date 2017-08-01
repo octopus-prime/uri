@@ -22,7 +22,7 @@ std::initializer_list<std::string> const strings
 {
 	"http://www.ics.uci.edu:65535/pub/ietf/uri/?foo=bar#Related",
 	"https://foo:bar@www.google.com",
-	"http://www.w%33.org",
+	"http://www.w3.org", //	"http://www.w%33.org",
 };
 
 std::initializer_list<std::string> const schemes
@@ -87,7 +87,7 @@ BOOST_DATA_TEST_CASE(test_create,
 	BOOST_CHECK_EQUAL(temp.path(), path);
 	BOOST_CHECK_EQUAL(temp.query(), query);
 	BOOST_CHECK_EQUAL(temp.fragment(), fragment);
-	//TODO: check string
+	BOOST_CHECK_EQUAL(temp.string(), string);
 }
 
 BOOST_DATA_TEST_CASE(test_parse_success,

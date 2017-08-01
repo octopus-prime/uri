@@ -15,15 +15,15 @@ uri::uri()
 {
 }
 
-uri::uri(std::string const& str)
+uri::uri(std::string const& string)
 :
 	uri()
 {
-	auto begin = std::cbegin(str);
-	auto end = std::cend(str);
+	auto begin = std::cbegin(string);
+	auto end = std::cend(string);
 	auto result = x3::parse(begin, end, parser::uri, *pimpl);
 	if (!result || begin != end)
-		throw std::invalid_argument("Invalid uri: " + str);
+		throw std::invalid_argument("Invalid uri: " + string);
 }
 
 uri::uri(std::string const& scheme, std::string const& userinfo,
@@ -77,6 +77,41 @@ std::string uri::query() const
 std::string uri::fragment() const
 {
 	return pimpl->fragment;
+}
+
+std::string uri::string() const
+{
+	std::string string = scheme();
+	string += "://";
+	if (!userinfo().empty())
+	{
+		string += userinfo();
+		string += '@';
+	}
+	if (!host().empty())
+	{
+		string += host();
+	}
+	if (port() != 0)
+	{
+		string += ':';
+		string += std::to_string(port());
+	}
+	if (!path().empty())
+	{
+		string += path();
+	}
+	if (!query().empty())
+	{
+		string += '?';
+		string += query();
+	}
+	if (!fragment().empty())
+	{
+		string += '#';
+		string += fragment();
+	}
+	return string;
 }
 
 }
