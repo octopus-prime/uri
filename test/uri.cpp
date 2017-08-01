@@ -20,7 +20,7 @@ BOOST_AUTO_TEST_SUITE(test)
 
 std::initializer_list<std::string> const strings
 {
-	"http://www.ics.uci.edu:65000/pub/ietf/uri/?foo=bar#Related",
+	"http://www.ics.uci.edu:65535/pub/ietf/uri/?foo=bar#Related",
 	"https://foo:bar@www.google.com",
 	"http://www.w%33.org",
 };
@@ -48,7 +48,7 @@ std::initializer_list<std::string> const hosts
 
 std::initializer_list<std::uint16_t> const ports
 {
-	65000,
+	65535,
 	0,
 	0,
 };
@@ -94,6 +94,7 @@ std::initializer_list<std::string> const invalids
 	"",
 	"https:/www.google.com:443",
 	"https://www.google.com:",
+	"http://www.ics.uci.edu:65536/pub/ietf/uri/?foo=bar#Related",
 };
 
 BOOST_DATA_TEST_CASE(test_failure, invalids, string)
