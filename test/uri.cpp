@@ -74,7 +74,23 @@ std::initializer_list<std::string> const fragments
 	"",
 };
 
-BOOST_DATA_TEST_CASE(test_success,
+BOOST_DATA_TEST_CASE(test_create,
+		strings ^ schemes ^ userinfos ^ hosts ^ ports ^ paths ^ queries ^ fragments,
+		string,   scheme,   userinfo,   host,   port,   path,   query,    fragment)
+{
+	uri temp;
+	BOOST_REQUIRE_NO_THROW(temp = uri(scheme, userinfo, host, port, path, query, fragment));
+	BOOST_CHECK_EQUAL(temp.scheme(), scheme);
+	BOOST_CHECK_EQUAL(temp.userinfo(), userinfo);
+	BOOST_CHECK_EQUAL(temp.host(), host);
+	BOOST_CHECK_EQUAL(temp.port(), port);
+	BOOST_CHECK_EQUAL(temp.path(), path);
+	BOOST_CHECK_EQUAL(temp.query(), query);
+	BOOST_CHECK_EQUAL(temp.fragment(), fragment);
+	//TODO: check string
+}
+
+BOOST_DATA_TEST_CASE(test_parse_success,
 		strings ^ schemes ^ userinfos ^ hosts ^ ports ^ paths ^ queries ^ fragments,
 		string,   scheme,   userinfo,   host,   port,   path,   query,    fragment)
 {
@@ -97,7 +113,7 @@ std::initializer_list<std::string> const invalids
 	"http://www.ics.uci.edu:65536/pub/ietf/uri/?foo=bar#Related",
 };
 
-BOOST_DATA_TEST_CASE(test_failure, invalids, string)
+BOOST_DATA_TEST_CASE(test_parse_failure, invalids, string)
 {
 	uri temp;
 	BOOST_CHECK_THROW(temp = uri(string), std::invalid_argument);
