@@ -26,6 +26,22 @@ uri::uri(std::string const& str)
 		throw std::invalid_argument("Invalid uri: " + str);
 }
 
+uri::uri(std::string const& scheme, std::string const& userinfo,
+		std::string const& host, std::uint16_t port,
+		std::string const& path, std::string const& query,
+		std::string const& fragment)
+:
+	uri()
+{
+	pimpl->scheme = scheme;
+	pimpl->hier_part.authority.userinfo = userinfo;
+	pimpl->hier_part.authority.host = host;
+	pimpl->hier_part.authority.port = port;
+	pimpl->hier_part.path = path;
+	pimpl->query = query;
+	pimpl->fragment = fragment;
+}
+
 uri::~uri() noexcept = default;
 
 std::string uri::scheme() const

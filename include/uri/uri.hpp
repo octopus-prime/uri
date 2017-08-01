@@ -18,6 +18,10 @@ public:
 
 	uri();
 	uri(std::string const& str);
+	uri(std::string const& scheme, std::string const& userinfo,
+		std::string const& host, std::uint16_t port,
+		std::string const& path, std::string const& query,
+		std::string const& fragment);
 	~uri() noexcept;
 	std::string scheme() const;
 	std::string userinfo() const;
