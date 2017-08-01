@@ -11,11 +11,11 @@ namespace uri {
 
 uri::uri()
 :
-	pimpl(std::make_shared<uri::impl>())
+	pimpl(std::make_shared<impl>())
 {
 }
 
-uri::uri(std::string str)
+uri::uri(std::string const& str)
 :
 	uri()
 {
@@ -26,9 +26,7 @@ uri::uri(std::string str)
 		throw std::invalid_argument("Invalid uri: " + str);
 }
 
-uri::~uri()
-{
-}
+uri::~uri() noexcept = default;
 
 std::string uri::scheme() const
 {

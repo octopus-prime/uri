@@ -17,8 +17,8 @@ public:
 	struct impl;
 
 	uri();
-	uri(std::string str);
-	~uri();
+	uri(std::string const& str);
+	~uri() noexcept;
 	std::string scheme() const;
 	std::string userinfo() const;
 	std::string host() const;
