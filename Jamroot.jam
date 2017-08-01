@@ -3,7 +3,7 @@ using testing ;
 project uri
 	:
 		requirements
-		<cxxflags>-std=c++17
+		<cxxflags>-std=c++14
 		<include>include
         <variant>debug:<cxxflags>--coverage
         <variant>debug:<linkflags>--coverage
@@ -25,10 +25,6 @@ lib uri
 unit-test uri_test
 	:
 		[ glob test/*.cpp ]
-#		[ glob test/value_test/*.cpp ]
-#		[ glob test/parser_test/*.cpp ]
-#       [ glob test/stringifier_test/*.cpp ]
-#       [ glob test/adapter_test/*.cpp ]
 		uri
 		/site-config//boost_unit_test_framework
 	:
